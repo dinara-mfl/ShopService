@@ -40,6 +40,15 @@ class ProductRepoTest {
     }
 
     @Test
+    void deleteProduct_ShouldKeepProducts_WhenProductDoesNotExist() {
+        productRepo.addProduct(keyboard);
+
+        productRepo.deleteProduct(mouse);
+
+        assertThat(productRepo.getAllProducts()).containsExactly(keyboard);
+    }
+
+    @Test
     void getAllProducts_ShouldReturnEmptyList() {
         assertThat(productRepo.getAllProducts()).isEmpty();
     }
