@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderListRepoTest {
 
-    private final OrderListRepo repo = new OrderListRepo();
+    private final OrderListRepo orderListRepo = new OrderListRepo();
 
     private final Product product = new Product(1, "Maus", new BigDecimal("19.90"));
 
@@ -17,63 +17,63 @@ class OrderListRepoTest {
 
     @Test
     void getOrderById_ShouldAddAndFindOrderById() {
-        repo.addOrder(firstOrder);
-        repo.addOrder(secondOrder);
+        orderListRepo.addOrder(firstOrder);
+        orderListRepo.addOrder(secondOrder);
 
-        assertThat(repo.getOrderById(2)).isEqualTo(secondOrder);
-        assertThat(repo.getAllOrders()).containsExactly(firstOrder, secondOrder);
+        assertThat(orderListRepo.getOrderById(2)).isEqualTo(secondOrder);
+        assertThat(orderListRepo.getAllOrders()).containsExactly(firstOrder, secondOrder);
     }
 
     @Test
     void getOrderById_ShouldReturnNull_WhenOrderDoesNotExist() {
-        repo.addOrder(firstOrder);
-        assertThat(repo.getOrderById(999)).isNull();
+        orderListRepo.addOrder(firstOrder);
+        assertThat(orderListRepo.getOrderById(999)).isNull();
     }
 
     @Test
     void deleteOrder_ShouldDeleteOnlySelectedOrder() {
-        repo.addOrder(firstOrder);
-        repo.addOrder(secondOrder);
+        orderListRepo.addOrder(firstOrder);
+        orderListRepo.addOrder(secondOrder);
 
-        repo.deleteOrder(1);
+        orderListRepo.deleteOrder(1);
 
-        assertThat(repo.getAllOrders()).containsExactly(secondOrder);
-        assertThat(repo.getOrderById(1)).isNull();
+        assertThat(orderListRepo.getAllOrders()).containsExactly(secondOrder);
+        assertThat(orderListRepo.getOrderById(1)).isNull();
     }
 
     @Test
     void deleteOrder_shouldKeepOrders_WhenIdDoesNotExist() {
-        repo.addOrder(firstOrder);
+        orderListRepo.addOrder(firstOrder);
 
-        repo.deleteOrder(999);
+        orderListRepo.deleteOrder(999);
 
-        assertThat(repo.getAllOrders()).containsExactly(firstOrder);
+        assertThat(orderListRepo.getAllOrders()).containsExactly(firstOrder);
     }
 
     @Test
     void addOrder_ShouldReplaceOrderWithSameId() {
-        repo.addOrder(firstOrder);
-        repo.addOrder(secondOrder);
+        orderListRepo.addOrder(firstOrder);
+        orderListRepo.addOrder(secondOrder);
         Order updatedOrder = new Order(1, Map.of(product, 5));
 
-        repo.addOrder(updatedOrder);
+        orderListRepo.addOrder(updatedOrder);
 
-        assertThat(repo.getOrderById(1)).isEqualTo(updatedOrder);
-        assertThat(repo.getAllOrders()).containsExactlyInAnyOrder(updatedOrder, secondOrder);
+        assertThat(orderListRepo.getOrderById(1)).isEqualTo(updatedOrder);
+        assertThat(orderListRepo.getAllOrders()).containsExactlyInAnyOrder(updatedOrder, secondOrder);
     }
 
     @Test
     void getAllOrders_shouldReturnEmptyList() {
-        assertThat(repo.getAllOrders()).isEmpty();
+        assertThat(orderListRepo.getAllOrders()).isEmpty();
     }
 
     @Test
     void getAllOrders_ShouldReturnCopyOfOrderList() {
-        repo.addOrder(firstOrder);
+        orderListRepo.addOrder(firstOrder);
 
-        List<Order> result = repo.getAllOrders();
+        List<Order> result = orderListRepo.getAllOrders();
         result.clear();
 
-        assertThat(repo.getAllOrders()).containsExactly(firstOrder);
+        assertThat(orderListRepo.getAllOrders()).containsExactly(firstOrder);
     }
 }
