@@ -12,7 +12,7 @@ public class ProductRepo {
         products.remove(product);
     }
 
-    public Product getProductsById(int id) {
+    public Product getProductById(int id) {
         for (Product product: products) {
             if (product.id() == id) {
                 return product;

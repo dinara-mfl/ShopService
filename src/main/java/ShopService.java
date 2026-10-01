@@ -22,7 +22,7 @@ public class ShopService {
                 return;
             }
 
-            Product product = productRepo.getProductsById(productId);
+            Product product = productRepo.getProductById(productId);
 
             if (product == null) {
                 System.out.println("Produkt existiert nicht: " + productId);
@@ -41,7 +41,7 @@ public class ShopService {
             return;
         }
 
-        Order order = orderRepo.getOrdersById(orderId);
+        Order order = orderRepo.getOrderById(orderId);
 
         if (order == null) {
             System.out.println("Bestellung existiert nicht.");

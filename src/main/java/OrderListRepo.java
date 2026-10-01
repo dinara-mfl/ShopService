@@ -6,16 +6,17 @@ public class OrderListRepo implements OrderRepo {
 
     @Override
     public void addOrder(Order order) {
+        deleteOrder(order.id());
         orders.add(order);
     }
 
     @Override
     public void deleteOrder(int id) {
-        orders.remove(getOrdersById(id));
+        orders.remove(getOrderById(id));
     }
 
     @Override
-    public Order getOrdersById(int id) {
+    public Order getOrderById(int id) {
         for (Order order: orders) {
             if (order.id() == id) {
                 return order;

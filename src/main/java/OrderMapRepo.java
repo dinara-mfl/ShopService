@@ -17,7 +17,7 @@ public class OrderMapRepo implements OrderRepo {
     }
 
     @Override
-    public Order getOrdersById(int id) {
+    public Order getOrderById(int id) {
         return orders.get(id);
     }
 
